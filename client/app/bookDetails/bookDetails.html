@@ -1,5 +1,14 @@
 <div class="row">
 <div class="large-12 columns">
 <h2>{{book.title}}</h2>
+<p>{{book.ISBN}}</p>
+
+<h3>Loaners</h3>
+<ul>
+  <li ng-repeat="loaner in book.loaners">
+    {{ loaner.name }}
+  </li>
+</ul>
+
 </div>
 </div>
