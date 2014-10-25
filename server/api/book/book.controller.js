@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Book = require('./book.model');
+var User = require('../user/user.model');
 
 // Get list of books
 exports.index = function(req, res) {
@@ -13,12 +14,30 @@ exports.index = function(req, res) {
 
 // Get a single book
 exports.show = function(req, res) {
-  Book.findById(req.params.id, function (err, book) {
-    if(err) { return handleError(res, err); }
+
+  Book.findOne({_id: req.params.id }).lean().exec().then(function(books) {
+      User.find({loans: books._id},function(err,docs){
+          console.log("=============");
+          books.loaners = docs;
+          console.log(books)
+      })
+    });
+
+  Book.findOne({_id: req.params.id }).lean().exec().then(function (book) {
     if(!book) { return res.send(404); }
-    return res.json(book);
+
+    User.find({loans: book._id},function(err, users){
+      if(err) { return handleError(res, err); }
+      if(!users) { return res.send(404); }
+
+      book.loaners = users;
+      return res.json(book);
+    });
+
+
   });
 };
+
 
 // Creates a new book in the DB.
 exports.create = function(req, res) {
