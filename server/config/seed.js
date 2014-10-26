@@ -22,6 +22,7 @@ var query = User.where({
 function seedUsers() {
   User.create({
     name: 'Gustav Lindberg',
+    googleId: '104788871386310670334',
     loans: []
   });
 }
@@ -97,7 +98,7 @@ User.find({}).remove().exec()
   .then(seedBooks)
   .then(seedLoans);
 
-sleep(1000,testPop);
+//sleep(1000,testPop);
 
 var book = User.findOne({
   name: /Mongo/

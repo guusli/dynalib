@@ -12,10 +12,19 @@ module.exports = function(app) {
   app.use('/api/loans', require('./api/loan'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/books', require('./api/book'));
+
+  app.use('/auth', require('./auth'));
+  var auth = require('./auth/auth.helpers');
+
+  app.get('/profile', auth.requiredAuthentication, function (req, res) {
+    res.send('Profile page of '+ req.session.user.name +'<br>'+' click to <a href="/logout">logout</a>');
+  });
+
   
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
-   .get(errors[404]);
+    .get(errors[404]);
 
   // All other routes should redirect to the index.html
   app.route('/*')

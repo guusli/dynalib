@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
   name: String,
+  googleId: String,
   loans : [{ type: Schema.Types.ObjectId, ref: 'Book' }]
 });
 
