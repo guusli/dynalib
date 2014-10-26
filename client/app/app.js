@@ -6,6 +6,11 @@ angular.module('dynalibraryApp', [
   'ngSanitize',
   'ngRoute'
 ])
+  .run(function($rootScope) {
+    $rootScope.$on('$viewContentLoaded', function () {
+        $(document).foundation();
+    });
+  })
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .otherwise({
