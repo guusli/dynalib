@@ -51,6 +51,7 @@ router.get('/callback', function(req, res) {
 
       plus.people.get({ userId: 'me', auth: oauth2Client }, function(err, response) {
 
+        console.log(response);
         User.findOneAndUpdate({googleId: response.id}, 
           { googleId: response.id, name: response.displayName },
           {upsert: true},

@@ -7,7 +7,6 @@
 
 var Book = require('../api/book/book.model');
 var User = require('../api/user/user.model');
-var Loan = require('../api/loan/loan.model');
 var _ = require('lodash');
 
 
@@ -55,7 +54,7 @@ function seedLoans() {
       return book._id
     });
 
-    User.findOneAndUpdate({name: /Gustav/}, {loans: booksIds } , {}, function(err, person) {
+    User.findOneAndUpdate({name: /Gustav/}, {loans: [booksIds[0]] } , {}, function(err, person) {
       if (err) {
         console.log('got an error');
       }
@@ -93,7 +92,6 @@ function testPop() {
 
 User.find({}).remove().exec()
   .then(Book.find({}).remove().exec())
-  .then(Loan.find({}).remove().exec())
   .then(seedUsers)
   .then(seedBooks)
   .then(seedLoans);

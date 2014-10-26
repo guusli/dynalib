@@ -10,7 +10,8 @@
   </li>
 </ul>
 
-<button ng-show="isLoggedIn">L&aring;na</button>
+<button ng-show="isLoggedIn && !isLoaner" ng-click="lendBook()">L&aring;na</button>
+<button ng-show="isLoggedIn && isLoaner" ng-click="returnBook()">L&auml;mna tillbaka</button>
 
 </div>
 </div>

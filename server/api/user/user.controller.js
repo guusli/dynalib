@@ -56,6 +56,28 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.addLoan = function(req, res) {
+  User.findByIdAndUpdate(req.session.user._id,
+    {$addToSet: {loans: req.params.bookId}},
+    {}, 
+    function (err, user) {
+    if(err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    return res.json(200, user);
+  });
+}
+
+// Deletes a loan from the DB.
+exports.removeLoan = function(req, res) {
+  User.findByIdAndUpdate(req.session.user._id,
+    {$pull: {loans: req.params.bookId}},
+    {}, 
+    function (err, user) {
+    if(err) { return handleError(res, err); }
+    return res.send(200, user);
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

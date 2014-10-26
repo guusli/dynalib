@@ -16,6 +16,7 @@ angular.module('dynalibraryApp', [
           session.create(user);
     });
   })
+  .constant('_', _)
 
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
