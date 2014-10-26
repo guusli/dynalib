@@ -11,6 +11,12 @@ angular.module('dynalibraryApp', [
         $(document).foundation();
     });
   })
+  .run(function(auth, session){
+     auth.getLoggedInUser().success(function(user) {
+          session.create(user);
+    });
+  })
+
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .otherwise({

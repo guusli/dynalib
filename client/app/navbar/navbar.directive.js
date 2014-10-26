@@ -1,17 +1,14 @@
 'use strict';
 
 angular.module('dynalibraryApp')
-  .directive('navbar', function ($window, auth) {
+  .directive('navbar', function ($window, auth, session) {
     return {
       templateUrl: 'app/navbar/navbar.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
 
-        auth.getLoggedInUser().success(function(user) {
-          scope.isLoggedIn = user.hasOwnProperty('_id');
-          console.log(scope.isLoggedIn);
-          scope.username = user.name;
-        });
+          scope.isLoggedIn = auth.isLoggedIn();
+          scope.username = session.user.name;
 
         scope.login = function() {
           $window.location.href = '/auth';
