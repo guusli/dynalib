@@ -1,6 +1,8 @@
 // Gruntfile.js
 module.exports = function(grunt) {
 
+  var localConfig = require('./server/config/local.env');
+
   grunt.initConfig({
 
     // configure nodemon
@@ -28,6 +30,31 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    mochaTest: {
+      options: {
+        reporter: 'spec'
+      },
+      src: ['server/**/*.spec.js']
+    },
+
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      }
+    },
+
+    env: {
+      test: {
+        NODE_ENV: 'test'
+      },
+      prod: {
+        NODE_ENV: 'production'
+      },
+      all: localConfig
+    },
+
     wiredep: {
       task: {
         src: [
@@ -42,8 +69,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-mocha-test');
+  grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-karma');
 
   // register the nodemon task when we run grunt
   grunt.registerTask('default', ['sass', 'wiredep', 'nodemon']);
+  grunt.registerTask('test', ['env:all', 'env:test', 'mochaTest']);
+  grunt.registerTask('clientTest', ['env:all','karma']);
 
 };

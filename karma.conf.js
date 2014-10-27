@@ -20,30 +20,13 @@ module.exports = function(config) {
       'client/bower_components/angular-route/angular-route.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/app/app.js',
-      'client/app/app.coffee',
       'client/app/**/*.js',
-      'client/app/**/*.coffee',
-      'client/components/**/*.js',
-      'client/components/**/*.coffee',
-      'client/app/**/*.jade',
-      'client/components/**/*.jade',
+      'client/app/services/**/*.js',
+      //'client/components/**/*.js',
       'client/app/**/*.html',
-      'client/components/**/*.html'
+      //'client/components/**/*.html',
+      'karma.testSetup.js'
     ],
-
-    preprocessors: {
-      '**/*.jade': 'ng-jade2js',
-      '**/*.html': 'html2js',
-      '**/*.coffee': 'coffee',
-    },
-
-    ngHtml2JsPreprocessor: {
-      stripPrefix: 'client/'
-    },
-
-    ngJade2JsPreprocessor: {
-      stripPrefix: 'client/'
-    },
 
     // list of files / patterns to exclude
     exclude: [],
