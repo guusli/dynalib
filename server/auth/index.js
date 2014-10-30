@@ -16,6 +16,8 @@ var router = express.Router();
 router
   .get('/', function(req, res) {
 
+    console.log(req.url);
+
   var url = oauth2Client.generateAuthUrl({
       access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token)
       scope: 'https://www.googleapis.com/auth/plus.me' // If you only need one scope you can pass it as string

@@ -29,19 +29,29 @@ function seedUsers() {
 function seedBooks() {
   Book.create({
     title: 'MongoDB Book',
-    ISBN: '1'
+    ISBN: '960-3232-059-0',
+    authors: "Author 1",
+    numberInStock: 5
   }, {
     title: 'NodeJS Book',
-    ISBN: '2'
+    ISBN: '960-32-059-0',
+    authors: "Author 2",
+    numberInStock: 2
   }, {
     title: 'Angular Book',
-    ISBN: '3'
+    ISBN: '321-425-059-0',
+    authors: "Author 1",
+    numberInStock: 1
   }, {
     title: 'CSS For Pros',
-    ISBN: '4'
+    ISBN: '12-425-059-0',
+    authors: "Author 2",
+    numberInStock: 2
   }, {
     title: 'Java For Dummies',
-    ISBN: '5'
+    ISBN: '65-425-059-0',
+    authors: "Author 1",
+    numberInStock: 5
   });
 }
 

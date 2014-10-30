@@ -27,7 +27,9 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-  app.use(session({secret: 'keyboard cat'}))
+  app.use(session({secret: 'keyboard cat',
+                    saveUninitialized: true,
+                    resave: true}));
   
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));

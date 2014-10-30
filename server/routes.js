@@ -5,12 +5,27 @@
 'use strict';
 
 var errors = require('./components/errors');
+var gbooks = require('google-books-search');
+var _ = require('lodash');
 
 module.exports = function(app) {
 
   // Insert routes below
   app.use('/api/users', require('./api/user'));
   app.use('/api/books', require('./api/book'));
+
+  app.get('/googleLookup', function(req, res) {
+    gbooks.search(req.query.isbn, {field: 'isbn'}, function(error, results) {
+    if ( ! error ) {
+        console.log(results);
+        res.json({title: results[0].title, authors: results[0].authors, thumbnail: results[0].thumbnail});
+    } else {
+        res.send("Error");
+    }
+
+    
+  });
+  });
 
   app.use('/auth', require('./auth'));
   var auth = require('./auth/auth.helpers');

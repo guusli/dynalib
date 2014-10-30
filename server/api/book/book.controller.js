@@ -3,6 +3,8 @@
 var _ = require('lodash');
 var Book = require('./book.model');
 var User = require('../user/user.model');
+var google = require('googleapis');
+
 
 // Get list of books
 exports.index = function(req, res) {
@@ -17,9 +19,7 @@ exports.show = function(req, res) {
 
   Book.findOne({_id: req.params.id }).lean().exec().then(function(books) {
       User.find({loans: books._id},function(err,docs){
-          console.log("=============");
           books.loaners = docs;
-          console.log(books)
       })
     });
 

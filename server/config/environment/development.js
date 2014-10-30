@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/dynalibrary-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

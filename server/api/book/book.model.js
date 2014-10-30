@@ -5,7 +5,10 @@ var mongoose = require('mongoose'),
 
 var BookSchema = new Schema({
   title: String,
-  ISBN: String
+  ISBN: String,
+  authors: String,
+  numberInStock: Number,
+  imageUrl: String
 });
 
 module.exports = mongoose.model('Book', BookSchema);
