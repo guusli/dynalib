@@ -1677,4 +1677,7 @@
   padding: 10px 0;
   border-bottom: 1px solid #dedede; }
 
+.number-in-stock input[type=text] {
+  text-align: center; }
+
 /*# sourceMappingURL=app.css.map */

@@ -13,11 +13,11 @@
 </div>
 
 <div class="row">
-<div class="small-12 columns">
-	<h3>Loaners</h3>
+<div class="small-12 columns" ng-show="book.loaners.length > 0">
+	<h3>L&aring;nad av</h3>
 	<ul>
 		<li ng-repeat="loaner in book.loaners">
-			{{ loaner.name }}
+			{{::loaner.name }}
 		</li>
 	</ul>
 </div>
