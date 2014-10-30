@@ -1,0 +1,42 @@
+<form novalidate class="simple-form" ng-submit="addBook(bookToAdd)">
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="small-2 columns">
+        <img ng-src="{{bookToAdd.thumbnail || 'http://placehold.it/128x168'}}">
+      </div>
+      <div class="small-10 columns">
+        <div class="row collapse">
+          <div class="small-10 columns">
+            <input type="text" ng-model="bookToAdd.isbn" placeholder="ISBN" />
+          </div>
+          <div class="small-2 columns">
+            <a ng-click="lookupBook(bookToAdd.isbn)" class="button postfix">H&auml;mta info</a>
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="small-12 columns">
+            <input type="text" ng-model="bookToAdd.title"  placeholder="Titel" />
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="small-12 columns">
+            <input type="text" ng-model="bookToAdd.authors"  placeholder="F&ouml;rfattare" />
+          </div>
+          <div class="row collapse">
+              <div class="small-2 columns"><a class="button" ng-click="decreaseStockNumber()" >-</a></div>
+              <div class="small-2 columns"><input ng-model="bookToAdd.numberInStock" /></div>
+              <div class="small-2 columns end"><a class="button" ng-click="increaseStockNumber()" >+</a></div> 
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-2 columns right">
+      <button type="submit">L&auml;gg till</button>
+    </div>
+  </div>
+  <input type="hidden" ng-model="bookToAdd.imageUrl" />
+</form>
+<pre>form = {{book | json}}</pre>

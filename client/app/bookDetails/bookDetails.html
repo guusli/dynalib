@@ -1,17 +1,24 @@
 <div class="row">
-<div class="large-12 columns">
-<h2>{{book.title}}</h2>
-<p>{{book.ISBN}}</p>
+	<div class="small-12 medium-4 columns small-only-text-center">
+		<img ng-src="{{book.imageUrl}}" />
+	</div>
+	<div class="small-12 medium-8  columns">
+		<h2>{{:: book.title}}</h2>
+		<div>{{:: book.authors}}</div>
+		<div>{{:: book.ISBN}}</div>
+		<div> <i class="fa fa-check-circle"></i> {{book.numberAvailable }} finns i biblioteket</div>
+		<button class="button" ng-show="isLoggedIn && !isLoaner" ng-click="lendBook()">L&aring;na</button>
+		<button class="button" ng-show="isLoggedIn && isLoaner" ng-click="returnBook()">L&auml;mna tillbaka</button>
+	</div>
+</div>
 
-<h3>Loaners</h3>
-<ul>
-  <li ng-repeat="loaner in book.loaners">
-    {{ loaner.name }}
-  </li>
-</ul>
-
-<button ng-show="isLoggedIn && !isLoaner" ng-click="lendBook()">L&aring;na</button>
-<button ng-show="isLoggedIn && isLoaner" ng-click="returnBook()">L&auml;mna tillbaka</button>
-
+<div class="row">
+<div class="small-12 columns">
+	<h3>Loaners</h3>
+	<ul>
+		<li ng-repeat="loaner in book.loaners">
+			{{ loaner.name }}
+		</li>
+	</ul>
 </div>
 </div>

@@ -14,14 +14,34 @@ module.exports = function(grunt) {
         }
       }
     },
+    express: {
+      options: {
+        port: process.env.PORT || 9000
+      },
+      dev: {
+        options: {
+          script: 'server/app.js',
+          debug: true
+        }
+      }
+    },
+
+    browserSync: {
+      bsFiles: {
+          src : 'client/app/*.css'
+      },
+      options: {
+          proxy: 'localhost:9000'
+      }
+    },
 
     sass: {
       server: {
         options: {
           loadPath: [
-            'client/bower_components',
-            'client/app',
-            'client/components'
+          'client/bower_components',
+          'client/app',
+          'client/components'
           ],
           compass: false
         },
@@ -59,11 +79,29 @@ module.exports = function(grunt) {
       task: {
         src: [
           'client/index.html', // .html support...
-        ]
-      }
-    }
+          ]
+        }
+      },
 
-  });
+      watch: {
+        sass: {
+          files: ['client/**/*.scss'],
+          tasks: ['sass'],
+          options: {
+            spawn: false,
+          },
+        },
+
+        server: {
+          files: ['server/**/*.js'],
+          tasks: ['express:dev'],
+          options: {
+            spawn: false,
+          },
+        }
+      },
+
+    });
 
   // load nodemon
   grunt.loadNpmTasks('grunt-nodemon');
@@ -72,9 +110,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-browser-sync');
+
 
   // register the nodemon task when we run grunt
-  grunt.registerTask('default', ['sass', 'wiredep', 'nodemon']);
+  grunt.registerTask('default', ['sass', 'wiredep', 'express:dev', 'watch']);
   grunt.registerTask('test', ['env:all', 'env:test', 'mochaTest']);
   grunt.registerTask('clientTest', ['env:all','karma']);
 

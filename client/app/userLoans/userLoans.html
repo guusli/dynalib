@@ -1,0 +1,12 @@
+<div class="row">
+		<h2>Mina l&aring;n</h2>
+		<div class="row book-row" ng-repeat="book in user.loans">
+			<div class="small-4 medium-2 columns">
+				<img src="http://placehold.it/150x200">
+			</div>
+			<div class="small-8 medium-10 columns">
+				<a href="books/{{book._id}}">{{book.title}}</a>
+				<p>{{book.author}}</p>
+			</div>
+		</div>
+</div>

@@ -8,6 +8,8 @@ angular.module('dynalibraryApp')
   this.destroy = function () {
     this.user = null;
   };
+  this.getUser = function() {
+  	return this.user;
+  }
 
-  return this;
 });

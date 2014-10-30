@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dynalibraryApp')
-  .directive('navbar', function ($window, auth, session) {
+  .directive('navbar', function ($window, $routeParams, auth, session) {
     return {
       templateUrl: 'app/navbar/navbar.html',
       restrict: 'EA',
@@ -11,6 +11,8 @@ angular.module('dynalibraryApp')
           scope.username = session.user.name;
 
         scope.login = function() {
+          $window.localStorage.redirectUrl = $window.location.pathname;
+
           $window.location.href = '/auth';
         };
 

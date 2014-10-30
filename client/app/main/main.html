@@ -1,22 +1,17 @@
 <div class="row">
-  <div class="small-12 large-12 columns">
-    <h2 class="page-header">Library:</h2>
-    <ul>
-      <div class="row" ng-repeat="book in books">
-      <div class="small-2 columns">
-        <img src="http://placehold.it/150x200">
-      </div>
-      <div class="large-10 small-10 columns">
-        <a href="books/{{book._id}}" tooltip="{{thing.info}}">{{book.title}}</a>
-      </div>
-      </div>
-    </ul>
+  <div class="large-12 columns">
+    <input type="text" placeholder="S&ouml;k" ng-model="searchText.title" />
+  </div>
+</div>
+<div class="row book-row" ng-repeat="book in books | filter:searchText">
+  <div class="small-4 medium-2 columns">
+        <img ng-src="{{book.imageUrl || 'http://placehold.it/128x168' }}" />
+  </div>
+  <div class="small-8 medium-10 columns">
+    <a href="books/{{book._id}}">{{book.title}}</a>
+    <p>{{book.authors}}</p>
   </div>
 </div>
 <div class="row">
-  <form novalidate class="simple-form" ng-submit="addBook(book)">
-    Title: <input type="text" ng-model="book.title" /><br />
-    <button type="submit">ADD</button>
-  </form>
-<pre>form = {{book | json}}</pre>
+  <add-book></add-book> 
 </div>
